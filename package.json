@@ -1,0 +1,31 @@
+{
+  "name": "fp-ts-stream",
+  "version": "1.0.0",
+  "description": "A library providing async and sync streams for fp-ts.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/incetarik/fp-ts-stream.git"
+  },
+  "keywords": [
+    "stream",
+    "fp-ts",
+    "async",
+    "generator"
+  ],
+  "author": "Tarik Ince <incetarik@hotmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/incetarik/fp-ts-stream/issues"
+  },
+  "homepage": "https://github.com/incetarik/fp-ts-stream#readme",
+  "dependencies": {
+    "fp-ts": "2.13.1"
+  },
+  "devDependencies": {
+    "typescript": "4.8.4"
+  }
+}
