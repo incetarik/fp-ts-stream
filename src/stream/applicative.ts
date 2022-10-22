@@ -13,6 +13,8 @@ import { Stream, URI } from './uri'
  * @param {Stream<A>} fa The source stream.
  * @return {(fab: Stream<(a: A) => B>) => Stream<B>} A function that takes
  * a {@link Stream} of functions.
+ * 
+ * @__PURE__
  */
 export function ap<A>(fa: Stream<A>) {
   /**
@@ -26,6 +28,8 @@ export function ap<A>(fa: Stream<A>) {
    * 
    * @return {Stream<B>} The output stream.
    * @step 1
+   * 
+   * @__PURE__
    */
   return function _ap<B>(fab: Stream<(a: A) => B>): Stream<B> {
     return function* __ap() {
