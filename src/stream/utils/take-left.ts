@@ -8,7 +8,7 @@ import { empty } from '../zero'
  *
  * @export
  * @param {number} count The number of elements to take.
- * @return {(ma: Stream<A>) => Stream<A>} A function that takes a stream and
+ * @return {(fa: Stream<A>) => Stream<A>} A function that takes a stream and
  * returns another stream that contains only given amount of elements.
  * 
  * @__PURE__
@@ -19,17 +19,17 @@ export function takeLeft(count: number) {
    * and returns another one contains that much amount of items.
    * 
    * @template A The value type.
-   * @param {Stream<A>} ma The input stream.
+   * @param {Stream<A>} fa The input stream.
    * @return {Stream<A>} The output stream.
    * 
    * @step 1
    * @__PURE__
    */
-  return function _take<A>(ma: Stream<A>): Stream<A> {
+  return function _take<A>(fa: Stream<A>): Stream<A> {
     if (count <= 0) return empty
 
     return function* __take() {
-      for (const a of ma()) {
+      for (const a of fa()) {
         yield a
         --count
 
@@ -44,7 +44,7 @@ export function takeLeft(count: number) {
  *
  * @export
  * @param {number} count The number of elements to take.
- * @return {(ma: Stream<A>) => Stream<A>} A function that takes a stream and
+ * @return {(fa: Stream<A>) => Stream<A>} A function that takes a stream and
  * returns another stream that contains only given amount of elements.
  * 
  * @__PURE__
