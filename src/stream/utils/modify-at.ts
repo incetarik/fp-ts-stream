@@ -4,15 +4,15 @@ import { Stream } from '../uri'
 
 /**
  * Applies a function to the element at the specified index, creating
- * a new {@link Stream}, or returning `None` if the index is out of
- * bounds.
+ * a new {@link Stream}.
+ * 
+ * *Note*: If the index was negative, the {@link Stream} will not be modified.
  *
  * @export
  * @template A The value type.
  * @param {number} i The index of the element to modify.
  * @param {(a: A) => A} f The function to modify the element.
- * @return {Stream<A>} A function that takes a stream and returns a new stream
- * whose element at given index is modified.
+ * @return {Stream<A>} The stream whose value at given index is modified.
  * 
  * @__PURE__
  */
