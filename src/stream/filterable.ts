@@ -53,7 +53,7 @@ export function filter<A>(predicate: Predicate<A>): <B extends A>(fa: Stream<B>)
  * @export
  * @template A The value type.
  * @param {Predicate<A>} predicate The predicate function.
- * @return {*}  {(fa: Stream<A>) => Stream<A>} A function that takes
+ * @return {(fa: Stream<A>) => Stream<A>} A function that takes
  * a stream and returns another stream passing the filter.
  * 
  * @category filtering
