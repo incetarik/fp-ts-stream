@@ -11,6 +11,7 @@ import { Stream, URI } from './uri'
  * @return {Stream<A>} A {@link Stream} instance that will yield no values.
  * 
  * @category model
+ * @__PURE__
  */
 export function zero<A>(): Stream<A> {
   return function* _zero() {}
