@@ -11,6 +11,7 @@ import { Stream, URI } from './uri'
  * @return {Stream<A>} A {@link Stream} instance of type `A`.
  * 
  * @category model
+ * @__PURE__
  */
 export function of<A>(a: A): Stream<A> {
   return function* _of() { yield a }
