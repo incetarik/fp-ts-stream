@@ -16,7 +16,7 @@ export function dropLeft(count: number) {
    * and returns another one skips that much of amount items.
    *
    * @template A The value type.
-   * @param {Stream<A>} ma The input stream.
+   * @param {Stream<A>} fa The input stream.
    * @return {Stream<A>} the output stream.
    * 
    * @step 1
