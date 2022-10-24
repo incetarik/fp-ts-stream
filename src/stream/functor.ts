@@ -16,6 +16,8 @@ import { Stream, URI } from './uri'
  * @param {(a: A) => B} f The mapper function.
  * @return {(fa: Stream<A>) => Stream<B>} A function that takes
  * a {@link Stream} to map.
+ * 
+ * @__PURE__
  */
 export function map<A, B>(f: (a: A) => B) {
   /**
@@ -26,6 +28,7 @@ export function map<A, B>(f: (a: A) => B) {
    * @return {Stream<B>} The output {@link Stream}.
    * 
    * @step 1
+   * @__PURE__
    */
   return function _map(fa: Stream<A>): Stream<B> {
     return function* __map() {
