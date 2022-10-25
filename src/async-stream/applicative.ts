@@ -1,5 +1,8 @@
 import { Applicative1 } from 'fp-ts/lib/Applicative'
+import { pipe } from 'fp-ts/lib/function'
 
+import { chain } from './chain'
+import { toArray } from './conversions'
 import { Functor } from './functor'
 import { Pointed } from './pointed'
 import { AsyncStream, URI } from './uri'
@@ -34,9 +37,13 @@ export function ap<A>(fa: AsyncStream<A>) {
    */
   return function _ap<B>(fab: AsyncStream<(a: A) => B>): AsyncStream<B> {
     return async function* __ap() {
-      for await (const a of fa()) {
-        for await (const f of fab()) {
-          yield f(a)
+      const as$ = toArray(fa)
+      const fabs$ = toArray(fab)
+
+      const [ as, fabs ] = await Promise.all([ as$, fabs$ ])
+      for (const a of as) {
+        for (const fab of fabs) {
+          yield fab(a)
         }
       }
     }
@@ -45,10 +52,34 @@ export function ap<A>(fa: AsyncStream<A>) {
 
 /**
  * The `Applicative` category instance for {@link AsyncStream}.
+ * 
+ * Same with {@link ApplicativePar}
  */
 export const Applicative: Applicative1<URI> = {
   URI,
   map: Functor.map,
   of: Pointed.of,
   ap(fab, fa) { return ap(fa)(fab) }
+}
+
+/**
+ * The `ApplicativePar` category instance for {@link AsyncStream}.
+ */
+export const ApplicativePar = Applicative
+
+/**
+ * The `ApplicativeSeq` category instance for {@link AsyncStream}.
+ */
+export const ApplicativeSeq: Applicative1<URI> = {
+  URI,
+  ap: _apSeq,
+  map: Functor.map,
+  of: Pointed.of,
+}
+
+function _apSeq<A, B>(fab: AsyncStream<(a: A) => B>, fa: AsyncStream<A>): AsyncStream<B> {
+  return pipe(
+    fab,
+    chain(f => Functor.map(fa, f))
+  )
 }

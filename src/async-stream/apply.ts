@@ -5,12 +5,14 @@ import {
   apSecond as applyApSecond,
 } from 'fp-ts/lib/Apply'
 
-import { Applicative } from './applicative'
+import { Applicative, ApplicativeSeq } from './applicative'
 import { Functor } from './functor'
 import { URI } from './uri'
 
 /**
  * The `Apply` category instance for {@link AsyncStream}.
+ * 
+ * Same with {@link ApplyPar}
  */
 export const Apply: Apply1<URI> = {
   URI,
@@ -32,3 +34,17 @@ export const apSecond = applyApSecond(Apply)
  * @category do notation
  */
 export const apS = applyApS(Apply)
+
+/**
+ * The `ApplySeq` category instance for {@link AsyncStream}.
+ */
+export const ApplySeq: Apply1<URI> = {
+  URI,
+  ap: ApplicativeSeq.ap,
+  map: Functor.map
+}
+
+/**
+ * The `Apply` category instance for {@link AsyncStream}.
+ */
+export const ApplyPar = Apply
