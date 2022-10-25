@@ -1,4 +1,4 @@
-import { FromIO1 } from 'fp-ts/lib/FromIO'
+import { FromIO1, fromIOK as fromIOFromIOK } from 'fp-ts/lib/FromIO'
 import { IO } from 'fp-ts/lib/IO'
 
 import { AsyncStream, URI } from '../uri'
@@ -27,3 +27,8 @@ export const FromIO: FromIO1<URI> = {
   URI,
   fromIO
 }
+
+/**
+ * @category lifting
+ */
+export const fromIOK = fromIOFromIOK(FromIO)
