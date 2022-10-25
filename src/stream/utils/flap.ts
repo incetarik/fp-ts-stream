@@ -1,7 +1,7 @@
 import { Stream } from '../uri'
 
 /**
- * Given an input a {@link Stream} of functions, `flag` returns a {@link Stream}
+ * Given an input a {@link Stream} of functions, `flap` returns a {@link Stream}
  * containing the results of applying each function to the given input.
  *
  * @export
