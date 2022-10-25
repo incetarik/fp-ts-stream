@@ -1,4 +1,4 @@
-
+import { Task } from 'fp-ts/lib/Task'
 
 import { AsyncStream } from './uri'
 
@@ -57,4 +57,19 @@ export function fromAsyncIterable<A>(a: AsyncIterable<A>): AsyncStream<A> {
       yield item
     }
   }
+}
+
+/**
+ * Converts an {@link AsyncStream} to a {@link Task} of the array of
+ * the elements.
+ *
+ * @export
+ * @template A The value type.
+ * @param {AsyncStream<A>} fa The input async stream.
+ * @return {Task<A[]>} The output task.
+ * 
+ * @__PURE__
+ */
+export function toTask<A>(fa: AsyncStream<A>): Task<A[]> {
+  return () => toArray(fa)
 }
