@@ -5,10 +5,15 @@ import {
 } from 'fp-ts/lib/Chain'
 import { ChainRec1 } from 'fp-ts/lib/ChainRec'
 import { Either, isLeft } from 'fp-ts/lib/Either'
+import {
+  chainFirstIOK as fromIOChainFirstIOK,
+  chainIOK as fromIOChainIOK,
+} from 'fp-ts/lib/FromIO'
 
 import { Applicative } from './applicative'
 import { Functor } from './functor'
 import { of } from './pointed'
+import { FromIO } from './transformations/from-io'
 import { AsyncStream, URI } from './uri'
 
 /**
@@ -223,3 +228,13 @@ export const bind = chainBind(Chain)
  * @category sequencing
  */
 export const chainFirst = chainChainFirst(Chain)
+
+/**
+ * @category sequencing
+ */
+export const chainIOK = fromIOChainIOK(FromIO, Chain)
+
+/**
+ * @category sequencing
+ */
+export const chainFirstIOK = fromIOChainFirstIOK(FromIO, Chain)
