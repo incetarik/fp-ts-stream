@@ -14,6 +14,10 @@ import { Separated } from 'fp-ts/lib/Separated'
 import { Compactable, separate } from './compactable'
 import { Functor, FunctorWithIndex, mapWithIndex } from './functor'
 import { AsyncStream, URI } from './uri'
+import {
+  AsyncPredicate,
+  AsyncPredicateWithIndex,
+} from './utils/async-predicate'
 
 /**
  * Returns an {@link AsyncStream} that produces values that passes from the
@@ -37,7 +41,7 @@ export function filter<A, B extends A>(refinement: Refinement<A, B>): (fa: Async
  *
  * @export
  * @template A The value type.
- * @param {Predicate<A>} predicate The predicate function.
+ * @param {AsyncPredicate<A>} predicate The predicate function.
  * @return {<B extends A>(fa: AsyncStream<B>) => AsyncStream<B>} A function
  * that takes an async stream and returns another async stream passing the
  * filter.
@@ -45,7 +49,7 @@ export function filter<A, B extends A>(refinement: Refinement<A, B>): (fa: Async
  * @category filtering
  * @__PURE__
  */
-export function filter<A>(predicate: Predicate<A>): <B extends A>(fa: AsyncStream<B>) => AsyncStream<B>
+export function filter<A>(predicate: AsyncPredicate<A>): <B extends A>(fa: AsyncStream<B>) => AsyncStream<B>
 
 /**
  * Returns a {@link Stream} that produces values that passes from the predicate
@@ -53,14 +57,14 @@ export function filter<A>(predicate: Predicate<A>): <B extends A>(fa: AsyncStrea
  *
  * @export
  * @template A The value type.
- * @param {Predicate<A>} predicate The predicate function.
+ * @param {AsyncPredicate<A>} predicate The predicate function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<A>} A function that takes
  * an async stream and returns another async stream passing the filter.
  * 
  * @category filtering
  * @__PURE__
  */
-export function filter<A>(predicate: Predicate<A>): (fa: AsyncStream<A>) => AsyncStream<A> {
+export function filter<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => AsyncStream<A> {
   /**
    * Takes an {@link AsyncStream} and returns another one that will yield the
    * elements of the given {@link AsyncStream} which pass the previously given
@@ -76,7 +80,7 @@ export function filter<A>(predicate: Predicate<A>): (fa: AsyncStream<A>) => Asyn
   return function _filter(fa: AsyncStream<A>): AsyncStream<A> {
     return async function* __filter() {
       for await (const a of fa()) {
-        if (predicate(a)) {
+        if (await predicate(a)) {
           yield a
         }
       }
@@ -175,7 +179,7 @@ export function filterWithIndex<A, B extends A>(refinementWithIndex: RefinementW
  * @export
  * @template A The value type.
  * @template B The refined new value type.
- * @param {PredicateWithIndex<number, A>} predicateWithIndex The predicate
+ * @param {AsyncPredicateWithIndex<number, A>} predicateWithIndex The predicate
  * function with index.
  * 
  * @return {<B extends A>(fa: AsyncStream<B>) => AsyncStream<B>} A function
@@ -184,7 +188,7 @@ export function filterWithIndex<A, B extends A>(refinementWithIndex: RefinementW
  * @category filtering
  * @__PURE__
  */
-export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): <B extends A>(fa: AsyncStream<B>) => AsyncStream<B>
+export function filterWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): <B extends A>(fa: AsyncStream<B>) => AsyncStream<B>
 
 /**
  * Maps an {@link AsyncStream} with an iterating function that takes the index
@@ -195,7 +199,7 @@ export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number
  * @export
  * @template A The value type.
  * @template B The refined new value type.
- * @param {PredicateWithIndex<number, A>} predicateWithIndex The predicate
+ * @param {AsyncPredicateWithIndex<number, A>} predicateWithIndex The predicate
  * function with index.
  * 
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
@@ -204,8 +208,8 @@ export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number
  * @category filtering
  * @__PURE__
  */
-export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): (fa: AsyncStream<A>) => AsyncStream<A>
-export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): (fa: AsyncStream<A>) => AsyncStream<A> {
+export function filterWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): (fa: AsyncStream<A>) => AsyncStream<A>
+export function filterWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): (fa: AsyncStream<A>) => AsyncStream<A> {
   /**
    * Takes an {@link AsyncStream} to filter with index.
    *
@@ -220,7 +224,7 @@ export function filterWithIndex<A>(predicateWithIndex: PredicateWithIndex<number
     return async function* __filterWithIndex() {
       let i = 0
       for await (const a of fa()) {
-        if (predicateWithIndex(i++, a)) {
+        if (await predicateWithIndex(i++, a)) {
           yield a
         }
       }
@@ -257,7 +261,7 @@ export function partition<A, B extends A>(refinement: Refinement<A, B>): (fa: As
  * @export
  * @template A The value type.
  * @template B The refined value type.
- * @param {Predicate<A, B>} predicate The predicate function.
+ * @param {AsyncPredicate<A, B>} predicate The predicate function.
  * @return {<B extends A>(fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<B>>} A
  * function that takes an async stream to separate it based on a given condition
  * function.
@@ -265,7 +269,7 @@ export function partition<A, B extends A>(refinement: Refinement<A, B>): (fa: As
  * @category filtering
  * @__PURE__
  */
-export function partition<A>(predicate: Predicate<A>): <B extends A>(fb: AsyncStream<B>) => Separated<AsyncStream<B>, AsyncStream<B>>
+export function partition<A>(predicate: AsyncPredicate<A>): <B extends A>(fb: AsyncStream<B>) => Separated<AsyncStream<B>, AsyncStream<B>>
 
 /**
  * Given an iterating function that is a {@link Predicate} or
@@ -276,7 +280,7 @@ export function partition<A>(predicate: Predicate<A>): <B extends A>(fb: AsyncSt
  *
  * @export
  * @template A The value type.
- * @param {Predicate<A>} predicate The predicate function.
+ * @param {AsyncPredicate<A>} predicate The predicate function.
  * @return {(fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>} A
  * function that takes an async stream to separate it based on a given condition
  * function.
@@ -284,8 +288,8 @@ export function partition<A>(predicate: Predicate<A>): <B extends A>(fb: AsyncSt
  * @category filtering
  * @__PURE__
  */
-export function partition<A>(predicate: Predicate<A>): (fb: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>
-export function partition<A>(predicate: Predicate<A>): (fb: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>> {
+export function partition<A>(predicate: AsyncPredicate<A>): (fb: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>
+export function partition<A>(predicate: AsyncPredicate<A>): (fb: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>> {
   return /**#__PURE__ */ partitionWithIndex<A>((_, a) => predicate(a))
 }
 
@@ -317,7 +321,7 @@ export function partitionWithIndex<A, B extends A>(
  * @export
  * @template A The value type.
  * @template B The refined value type.
- * @param {PredicateWithIndex<number, A, B>} predicateWithIndex The predicate
+ * @param {AsyncPredicateWithIndex<number, A, B>} predicateWithIndex The predicate
  * function.
  * @return {<B extends A>(
  *   fa: AsyncStream<B>
@@ -327,7 +331,7 @@ export function partitionWithIndex<A, B extends A>(
  * @category filtering
  * @__PURE__
  */
-export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): <B extends A>(fb: AsyncStream<B>) => Separated<AsyncStream<B>, AsyncStream<B>>
+export function partitionWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): <B extends A>(fb: AsyncStream<B>) => Separated<AsyncStream<B>, AsyncStream<B>>
 
 /**
  * Same as [`partition`](#partition), but passing also the index to the
@@ -335,7 +339,7 @@ export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<num
  *
  * @export
  * @template A The value type.
- * @param {PredicateWithIndex<number, A>} predicateWithIndex The predicate
+ * @param {AsyncPredicateWithIndex<number, A>} predicateWithIndex The predicate
  * function.
  * @return {(fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>} A
  * function that takes an async stream to separate it based on a given
@@ -344,8 +348,8 @@ export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<num
  * @category filtering
  * @__PURE__
  */
-export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): (fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>
-export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<number, A>): (fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>> {
+export function partitionWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): (fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>>
+export function partitionWithIndex<A>(predicateWithIndex: AsyncPredicateWithIndex<number, A>): (fa: AsyncStream<A>) => Separated<AsyncStream<A>, AsyncStream<A>> {
   /**
    * Partitions an {@link AsyncStream} based on the previously given function.
    *
@@ -355,7 +359,14 @@ export function partitionWithIndex<A>(predicateWithIndex: PredicateWithIndex<num
   return function _partitionWithIndex(fa) {
     return pipe(
       fa,
-      mapWithIndex((i, it) => predicateWithIndex(i, it) ? right(it) : left(it)),
+      mapWithIndex(async (i, it) => {
+        if (await predicateWithIndex(i, it)) {
+          return right(it)
+        }
+        else {
+          return left(it)
+        }
+      }),
       separate
     )
   }
