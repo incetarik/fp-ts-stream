@@ -6,6 +6,10 @@ import {
 import { ChainRec1 } from 'fp-ts/lib/ChainRec'
 import { Either, isLeft } from 'fp-ts/lib/Either'
 import {
+  chainEitherK as fromEitherChainEitherK,
+  chainFirstEitherK as fromEitherChainFirstEitherK,
+} from 'fp-ts/lib/FromEither'
+import {
   chainFirstIOK as fromIOChainFirstIOK,
   chainIOK as fromIOChainIOK,
 } from 'fp-ts/lib/FromIO'
@@ -13,6 +17,7 @@ import {
 import { Applicative } from './applicative'
 import { Functor } from './functor'
 import { of } from './pointed'
+import { FromEither } from './transformations/from-either'
 import { FromIO } from './transformations/from-io'
 import { AsyncStream, URI } from './uri'
 
@@ -238,3 +243,13 @@ export const chainIOK = fromIOChainIOK(FromIO, Chain)
  * @category sequencing
  */
 export const chainFirstIOK = fromIOChainFirstIOK(FromIO, Chain)
+
+/**
+ * @category sequencing
+ */
+export const chainEitherK = fromEitherChainEitherK(FromEither, Chain)
+
+/**
+ * @category sequencing
+ */
+export const chainFirstEitherK = fromEitherChainFirstEitherK(FromEither, Chain)
