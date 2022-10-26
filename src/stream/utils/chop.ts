@@ -1,5 +1,5 @@
 import { Stream } from '../uri'
-import { isEmpty } from './is-empty'
+import { prepend } from './prepend'
 
 /**
  * A useful recursion pattern for processing a {@link Stream} to produce a new
@@ -30,13 +30,18 @@ export function chop<A, B>(f: (fa: Stream<A>) => [ B, Stream<A> ]) {
     return function* __chop() {
       let target = fa
 
-      let curr = f(target)
-      for (; !isEmpty(curr[ 1 ]); curr = f(curr[ 1 ])) {
-        yield curr[ 0 ]
-        target = curr[ 1 ]
-      }
+      while (true) {
+        const [ b, nextStream ] = f(target)
+        yield b
 
-      yield curr[ 0 ]
+        // Executing the stream manually to prevent invoking the next twice.
+        const nextGen = nextStream()
+        const { value, done } = nextGen.next()
+
+        if (done) { return }
+
+        target = prepend(value)(() => nextGen)
+      }
     }
   }
 }
