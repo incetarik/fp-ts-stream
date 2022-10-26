@@ -1,5 +1,5 @@
-import { of as streamOf } from '../../stream/pointed'
-import { Stream } from '../../stream/uri'
+import { of as streamOf } from '../../Stream/pointed'
+import { Stream } from '../../Stream/uri'
 import { of } from '../pointed'
 import { AsyncStream } from '../uri'
 

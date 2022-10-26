@@ -4,7 +4,7 @@ import { Unfoldable1 } from 'fp-ts/lib/Unfoldable'
 import { Stream, URI } from './uri'
 
 /**
- * Takes afunction which returns an {@link Option} of a tuple containing an
+ * Takes a function which returns an {@link Option} of a tuple containing an
  * outcome value and an input for the following iteration.
  * 
  * This function applies given `f` to the inital value `b` and then recursively

@@ -1,4 +1,4 @@
-import { Stream } from '../../stream/uri'
+import { Stream } from '../../Stream/uri'
 import { AsyncStream } from '../uri'
 
 /**

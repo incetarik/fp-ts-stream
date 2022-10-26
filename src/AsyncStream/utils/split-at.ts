@@ -1,6 +1,6 @@
 import { pipe } from 'fp-ts/lib/function'
 
-import { Stream } from '../../stream/uri'
+import { Stream } from '../../Stream/uri'
 import { AsyncStream } from '../uri'
 import { empty } from '../zero'
 import { dropLeft } from './drop-left'
