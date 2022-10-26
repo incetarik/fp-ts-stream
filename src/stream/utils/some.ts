@@ -15,8 +15,8 @@ import { Stream } from '../uri'
  */
 export function some<A>(predicate: Predicate<A>) {
   /**
-   * Takes a stream to check if any element is passes the previously given
-   * predicate.
+   * Takes a {@link Stream} to check if any element is passes the previously
+   * given predicate.
    *
    * @param {Stream<A>} fa The input stream.
    * @return {boolean} `true` if any of the stream members passes from the

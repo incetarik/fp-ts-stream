@@ -23,10 +23,10 @@ import { isEmpty } from './is-empty'
  */
 export function matchW<B, A, C>(onEmpty: Lazy<B>, onNonEmpty: (fa: Stream<A>) => C) {
   /**
-   * Takes a stream to match.
+   * Takes a {@link Stream} to match.
    *
    * @param {Stream<A>} fa The stream.
-   * @return {B | C}  {(B | C)} The match value.
+   * @return {B | C} The match value.
    * 
    * @category pattern matching
    * @__PURE__

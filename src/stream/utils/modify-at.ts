@@ -21,7 +21,7 @@ export function modifyAt<A>(i: number, f: (a: A) => A) {
 
   /**
    * Takes a {@link Stream} to modify its element at previously given
-   * index and returns a new {@link Stream.}
+   * index and returns a new {@link Stream}.
    *
    * @param {Stream<A>} fa The input stream.
    * @return {Stream<A>} The output stream.

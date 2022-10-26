@@ -8,13 +8,13 @@ import { Stream } from '../uri'
  *
  * @export
  * @template A The value type.
- * @param {Stream<A>} ma The input stream.
+ * @param {Stream<A>} fa The input stream.
  * @return {Option<A>} An option of the last value.
  * 
  * @__PURE__
  */
-export function last<A>(ma: Stream<A>): Option<A> {
-  const gen = ma()
+export function last<A>(fa: Stream<A>): Option<A> {
+  const gen = fa()
   const { done, value } = gen.next()
   if (done) return none
 

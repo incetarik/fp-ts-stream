@@ -61,7 +61,7 @@ export function zipArray<A, B>(fAOrB: Stream<A> | Stream<B>, fb?: Stream<B>): St
  * @template A The value type of the first stream.
  * @template B The value type of the second stream.
  * @param {(Stream<readonly [ A, B ]>)} mma The input stream of streams.
- * @return {[ Stream<A>, Stream<B> ]} A stream of elements from both streams.
+ * @return {[ Stream<A>, Stream<B> ]} A tuple of elements from both streams.
  * 
  * @__PURE__
  */

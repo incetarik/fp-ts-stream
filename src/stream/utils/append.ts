@@ -32,7 +32,7 @@ export function appendW<B>(end: B) {
    * of it.
    *
    * @template A The value type.
-   * @param {Stream<A>} ma The input stream.
+   * @param {Stream<A>} fa The input stream.
    * @return {(Stream<A | B>)} The output stream.
    * 
    * @step 1

@@ -11,8 +11,8 @@ import { takeLeft } from './take-left'
  *
  * @export
  * @param {number} n The number of elements the first stream will contain.
- * @return {(fa: Stream<A>) => Stream<A>} A function that takes a stream to
- * split.
+ * @return {(fa: Stream<A>) => Stream<Stream<A>>} A function that takes a stream
+ * to split.
  * 
  * @__PURE__
  */
@@ -22,7 +22,7 @@ export function splitAt(n: number) {
    *
    * @template A The value type.
    * @param {Stream<A>} fa The input stream.
-   * @return {Stream<Stream<A>>} A new stream of of two streams.
+   * @return {Stream<Stream<A>>} A new stream of two streams.
    * 
    * @step 1
    * @__PURE__

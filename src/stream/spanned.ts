@@ -40,12 +40,12 @@ export interface Spanned<I, R> {
  * @template A The value type.
  * @template B The refined value type.
  * @param {Refinement<A, B>} refinement The refinement function.
- * @return {(ma: Stream<A>) => Spanned<B, A>} A function that takes
+ * @return {(fa: Stream<A>) => Spanned<B, A>} A function that takes
  * a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanLeft<A, B extends A>(refinement: Refinement<A, B>): (ma: Stream<A>) => Spanned<B, A>
+export function spanLeft<A, B extends A>(refinement: Refinement<A, B>): (fa: Stream<A>) => Spanned<B, A>
 
 /**
  * Spans a {@link Stream} from the left side of it, based on a predicate.
@@ -53,12 +53,12 @@ export function spanLeft<A, B extends A>(refinement: Refinement<A, B>): (ma: Str
  * @export
  * @template A The value type.
  * @param {Predicate<A>} predicate The predicate function.
- * @return {<B extends A>(mb: Stream<B>) => Spanned<B, B>} A function
+ * @return {<B extends A>(fb: Stream<B>) => Spanned<B, B>} A function
  * that takes a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanLeft<A>(predicate: Predicate<A>): <B extends A>(mb: Stream<B>) => Spanned<B, B>
+export function spanLeft<A>(predicate: Predicate<A>): <B extends A>(fb: Stream<B>) => Spanned<B, B>
 
 /**
  * Spans a {@link Stream} from the left side of it, based on a predicate.
@@ -66,15 +66,15 @@ export function spanLeft<A>(predicate: Predicate<A>): <B extends A>(mb: Stream<B
  * @export
  * @template A The value type.
  * @param {Predicate<A>} predicate The predicate function.
- * @return {*}  {(ma: Stream<A>) => Spanned<A, A>} A function that takes
+ * @return {(fa: Stream<A>) => Spanned<A, A>} A function that takes
  * a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanLeft<A>(predicate: Predicate<A>): (ma: Stream<A>) => Spanned<A, A>
-export function spanLeft<A>(predicate: Predicate<A>): (ma: Stream<A>) => Spanned<A, A> {
-  return function _spanLeft(ma) {
-    const gen = ma()
+export function spanLeft<A>(predicate: Predicate<A>): (fa: Stream<A>) => Spanned<A, A>
+export function spanLeft<A>(predicate: Predicate<A>): (fa: Stream<A>) => Spanned<A, A> {
+  return function _spanLeft(fa) {
+    const gen = fa()
     const matches: A[] = []
 
     while (true) {
@@ -115,12 +115,12 @@ export function spanLeft<A>(predicate: Predicate<A>): (ma: Stream<A>) => Spanned
  * @template A The value type.
  * @template B The refined value type.
  * @param {Refinement<A, B>} refinement The refinement function.
- * @return {(ma: Stream<A>) => Spanned<B, A>} A function that takes
+ * @return {(fa: Stream<A>) => Spanned<B, A>} A function that takes
  * a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanRight<A, B extends A>(refinement: Refinement<A, B>): (ma: Stream<A>) => Spanned<B, A>
+export function spanRight<A, B extends A>(refinement: Refinement<A, B>): (fa: Stream<A>) => Spanned<B, A>
 
 /**
  * Spans a {@link Stream} from the right side of it, based on a predicate.
@@ -130,12 +130,12 @@ export function spanRight<A, B extends A>(refinement: Refinement<A, B>): (ma: St
  * @export
  * @template A The value type.
  * @param {Predicate<A>} predicate The predicate function.
- * @return {<B extends A>(mb: Stream<B>) => Spanned<B, B>} A function
+ * @return {<B extends A>(fb: Stream<B>) => Spanned<B, B>} A function
  * that takes a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanRight<A>(predicate: Predicate<A>): <B extends A>(mb: Stream<B>) => Spanned<B, B>
+export function spanRight<A>(predicate: Predicate<A>): <B extends A>(fb: Stream<B>) => Spanned<B, B>
 
 /**
  * Spans a {@link Stream} from the right side of it, based on a predicate.
@@ -145,13 +145,13 @@ export function spanRight<A>(predicate: Predicate<A>): <B extends A>(mb: Stream<
  * @export
  * @template A The value type.
  * @param {Predicate<A>} predicate The predicate function.
- * @return {*}  {(ma: Stream<A>) => Spanned<A, A>} A function that takes
+ * @return {(fa: Stream<A>) => Spanned<A, A>} A function that takes
  * a {@link Stream} and returns a {@link Spanned} instance of it.
  * 
  * @__PURE__
  */
-export function spanRight<A>(predicate: Predicate<A>): (ma: Stream<A>) => Spanned<A, A>
-export function spanRight<A>(predicate: Predicate<A>): (ma: Stream<A>) => Spanned<A, A> {
+export function spanRight<A>(predicate: Predicate<A>): (fa: Stream<A>) => Spanned<A, A>
+export function spanRight<A>(predicate: Predicate<A>): (fa: Stream<A>) => Spanned<A, A> {
   return function _spanRight(ma) {
     return pipe(
       ma,

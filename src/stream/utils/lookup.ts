@@ -30,7 +30,7 @@ export function lookup(i: number): <A>(fa: Stream<A>) => Option<A>
  * @export
  * @param {number} i The index to lookup.
  * @param {Stream<A>} fa The input stream
- * @return {(Option<A>} An option of the element at index.
+ * @return {Option<A>} An option of the element at index.
  * 
  * @__PURE__
  */

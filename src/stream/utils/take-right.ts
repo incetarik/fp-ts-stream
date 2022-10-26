@@ -10,7 +10,7 @@ import { empty } from '../zero'
  * **Warning: This function consumes the stream.**
  *
  * @export
- * @param {number} count The number of elements to take.
+ * @param {number} n The number of elements to take.
  * @return {(fa: Stream<A>) => Stream<A>} A function that takes a stream and
  * returns another stream that contains only given amount of elements.
  * 

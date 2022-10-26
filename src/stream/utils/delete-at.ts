@@ -23,7 +23,7 @@ export function deleteAt(i: number) {
    *
    * @template A The value type.
    * @param {Stream<A>} fa The input stream.
-   * @return {*}  {Stream<A>} The output stream.
+   * @return {Stream<A>} The output stream.
    * 
    * @step 1
    * @__PURE__
