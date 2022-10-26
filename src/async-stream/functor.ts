@@ -13,11 +13,11 @@ import { AsyncStream, URI } from './uri'
  * @export
  * @template A The value type.
  * @template B The new/mapped value type.
- * @param {(a: A) => B} f The mapper function.
+ * @param {(a: A) => B | Promise<B>} f The mapper function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes
  * a {@link AsyncStream} to map.
  */
-export function map<A, B>(f: (a: A) => B) {
+export function map<A, B>(f: (a: A) => B | Promise<B>) {
   /**
    * Returns a {@link AsyncStream} from the given {@link AsyncStream} instance
    * after mapping its values with previously given function.
@@ -31,7 +31,7 @@ export function map<A, B>(f: (a: A) => B) {
   return function _map(fa: AsyncStream<A>): AsyncStream<B> {
     return async function* __map() {
       for await (const a of fa()) {
-        yield f(a)
+        yield await f(a)
       }
     }
   }
@@ -44,11 +44,11 @@ export function map<A, B>(f: (a: A) => B) {
  * @export
  * @template A The value type.
  * @template B The new/mapped value type.
- * @param {(i: number, a: A) => B} f The mapper function.
+ * @param {(i: number, a: A) => B | Promise<B>} f The mapper function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes
  * a {@link AsyncStream} to map.
  */
-export function mapWithIndex<A, B>(f: (i: number, a: A) => B) {
+export function mapWithIndex<A, B>(f: (i: number, a: A) => B | Promise<B>) {
   /**
    * Returns a {@link AsyncStream} from the given {@link AsyncStream} instance
    * after mapping its values with previously given function.
@@ -63,7 +63,7 @@ export function mapWithIndex<A, B>(f: (i: number, a: A) => B) {
     return async function* __mapWithIndex() {
       let i = 0
       for await (const a of fa()) {
-        yield f(i++, a)
+        yield await f(i++, a)
       }
     }
   }
