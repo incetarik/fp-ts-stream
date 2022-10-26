@@ -77,6 +77,7 @@ export * from './utils/zip'
 export * from './utils/zip-array'
 export * from './utils/zip-with'
 
+export * from './transformations/from-async-predicate'
 export * from './transformations/from-either'
 export * from './transformations/from-io'
 export * from './transformations/from-option'
