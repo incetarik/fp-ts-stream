@@ -1,9 +1,9 @@
 import { Either, isRight } from 'fp-ts/lib/Either'
 import { FromEither1, fromEitherK as fromEitherK_ } from 'fp-ts/lib/FromEither'
 
-import { of } from './pointed'
-import { Stream, URI } from './uri'
-import { empty } from './zero'
+import { of } from '../pointed'
+import { Stream, URI } from '../uri'
+import { empty } from '../zero'
 
 /**
  * Create a {@link Stream} from {@link Either}.
