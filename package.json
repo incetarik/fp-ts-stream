@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/incetarik/fp-ts-stream#readme",
   "dependencies": {
-    "fp-ts": "2.13.1"
+    "fp-ts": "2.13.1",
+    "tslib": "2.4.0"
   },
   "devDependencies": {
     "typescript": "4.8.4",
