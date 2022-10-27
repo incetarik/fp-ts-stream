@@ -1,35 +1,8 @@
 {
+  "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "target": "ES2015",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "module": "commonjs",
-    "rootDir": "./src",
-    "moduleResolution": "node",
-    "baseUrl": "./src",
-    "importHelpers": true,
-    "declaration": true,
-    "noUnusedLocals": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "stripInternal": true,
-    "emitDeclarationOnly": false,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "newLine": "lf",
-    "lib": [
-      "DOM",
-      "ES2021"
-    ],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true
-  },
-  "exclude": [
-    "node_modules",
-    "tests",
-    "dist"
-  ]
+    "module": "esnext",
+    "outDir": "dist/esm",
+    "target": "esnext"
+  }
 }
