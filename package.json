@@ -7,6 +7,26 @@
       "types": "./dist/esm/index.d.ts",
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
+    },
+    "./Stream": {
+      "types": "./dist/esm/Stream/index.d.ts",
+      "import": "./dist/esm/Stream/index.js",
+      "require": "./dist/cjs/Stream/index.js"
+    },
+    "./AsyncStream": {
+      "types": "./dist/esm/AsyncStream/index.d.ts",
+      "import": "./dist/esm/AsyncStream/index.js",
+      "require": "./dist/cjs/AsyncStream/index.js"
+    },
+    "./Stream/*": {
+      "types": "./dist/esm/Stream/*.d.ts",
+      "import": "./dist/esm/Stream/*.js",
+      "require": "./dist/cjs/Stream/*.js"
+    },
+    "./AsyncStream/*": {
+      "types": "./dist/esm/AsyncStream/*.d.ts",
+      "import": "./dist/esm/AsyncStream/*.js",
+      "require": "./dist/cjs/AsyncStream/*.js"
     }
   },
   "module": "dist/esm/index.js",
