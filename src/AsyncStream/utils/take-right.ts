@@ -1,6 +1,5 @@
 import { toArray } from '../conversions'
 import { AsyncStream } from '../uri'
-import { empty } from '../zero'
 
 /**
  * Takes given amount of items from an {@link AsyncStream} from the end to the
@@ -33,7 +32,7 @@ export function takeRight(n: number) {
    */
   return function _takeRight<A>(fa: AsyncStream<A>): AsyncStream<A> {
     return async function* __takeRight() {
-      if (n <= 0) return empty
+      if (n <= 0) { return }
 
       const as = await toArray(fa)
       for (

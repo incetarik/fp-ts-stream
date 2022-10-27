@@ -1,6 +1,5 @@
 import { toArray } from '../conversions'
 import { Stream } from '../uri'
-import { empty } from '../zero'
 
 /**
  * Takes given amount of items from a {@link Stream} from the end to the start.
@@ -31,7 +30,7 @@ export function takeRight(n: number) {
    */
   return function _takeRight<A>(fa: Stream<A>): Stream<A> {
     return function* __takeRight() {
-      if (n <= 0) return empty
+      if (n <= 0) { return }
 
       const as = toArray(fa)
       for (
