@@ -1,2 +1,7 @@
 *lock.y[a]ml
 release.sh
+.release-it.json
+*.sh
+.git
+.gitignore
+.vscode
