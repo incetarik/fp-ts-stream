@@ -1,10 +1,15 @@
 {
   "name": "fp-ts-stream",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A library providing async and sync streams for fp-ts.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "tsc",
+    "build": "tsc",
+    "build-watch": "tsc --watch",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -26,6 +31,7 @@
     "fp-ts": "2.13.1"
   },
   "devDependencies": {
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "release-it": "*"
   }
 }

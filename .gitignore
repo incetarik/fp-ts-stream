@@ -4,3 +4,4 @@ node_modules
 dist
 release.sh
 launch.json
+.release-it.json
