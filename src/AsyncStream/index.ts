@@ -1,5 +1,6 @@
 export * from './alternative'
 export * from './applicative'
+export * from './applicative-seq'
 export * from './apply'
 export * from './chain'
 export * from './compactable'

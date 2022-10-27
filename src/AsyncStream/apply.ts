@@ -5,7 +5,8 @@ import {
   apSecond as applyApSecond,
 } from 'fp-ts/lib/Apply'
 
-import { Applicative, ApplicativeSeq } from './applicative'
+import { Applicative } from './applicative'
+import { ApplicativeSeq } from './applicative-seq'
 import { Functor } from './functor'
 import { URI } from './uri'
 
