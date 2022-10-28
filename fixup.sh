@@ -11,3 +11,37 @@ cat >dist/esm/package.json <<!EOF
   "sideEffects": false
 }
 !EOF
+
+cat >dist/cjs/Stream/package.json <<!EOF
+{
+  "main": "./index.js",
+  "typings": "./index.d.ts",
+  "sideEffects": false
+}
+!EOF
+
+cat >dist/cjs/AsyncStream/package.json <<!EOF
+{
+  "main": "./index.js",
+  "typings": "./index.d.ts",
+  "sideEffects": false
+}
+!EOF
+
+
+cat >dist/esm/Stream/package.json <<!EOF
+{
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "sideEffects": false
+}
+!EOF
+
+cat >dist/esm/AsyncStream/package.json <<!EOF
+{
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "sideEffects": false
+}
+!EOF
+
