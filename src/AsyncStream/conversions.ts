@@ -1,5 +1,6 @@
 import { Task } from 'fp-ts/lib/Task'
 
+import { Stream } from '../Stream/uri'
 import { AsyncStream } from './uri'
 
 /**
@@ -140,4 +141,27 @@ export function fromPromisesSeq<A>(input: Iterable<Promise<A>>): AsyncStream<A> 
  */
 export function toTask<A>(fa: AsyncStream<A>): Task<A[]> {
   return () => toArray(fa)
+}
+
+/**
+ * Converts an {@link AsyncStream} to a {@link Task} of a {@link Stream} of the
+ * elements.
+ *
+ * @export
+ * @template A The value type.
+ * @param {AsyncStream<A>} fa The input async stream.
+ * @return {Task<Stream<A>>} The output stream task.
+ * 
+ * @__PURE__
+ */
+export function toStream<A>(fa: AsyncStream<A>): Task<Stream<A>> {
+  return async function _toStream() {
+    const as = await toArray(fa)
+
+    return function* __toStream() {
+      for (const a of as) {
+        yield a
+      }
+    }
+  }
 }
