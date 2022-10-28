@@ -32,31 +32,11 @@
         "types": "./dist/esm/AsyncStream/index.d.ts",
         "default": "./dist/esm/AsyncStream/index.js"
       }
-    },
-    "./Stream/*": {
-      "require": {
-        "types": "./dist/cjs/Stream/*.d.ts",
-        "default": "./dist/cjs/Stream/*.js"
-      },
-      "import": {
-        "types": "./dist/esm/Stream/*.d.ts",
-        "default": "./dist/esm/Stream/*.js"
-      }
-    },
-    "./AsyncStream/*": {
-      "require": {
-        "types": "./dist/cjs/AsyncStream/*.d.ts",
-        "default": "./dist/cjs/AsyncStream/*.js"
-      },
-      "import": {
-        "types": "./dist/esm/AsyncStream/*.d.ts",
-        "default": "./dist/esm/AsyncStream/*.js"
-      }
     }
   },
+  "types": "dist/cjs/index.d.ts",
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "test": "jest",
