@@ -32,6 +32,7 @@
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "test": "jest",
     "prepublish": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
@@ -43,12 +44,6 @@
     "type": "git",
     "url": "git+https://github.com/incetarik/fp-ts-stream.git"
   },
-  "keywords": [
-    "stream",
-    "fp-ts",
-    "async",
-    "generator"
-  ],
   "author": "Tarik Ince <incetarik@hotmail.com>",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
@@ -62,5 +57,18 @@
   "devDependencies": {
     "typescript": "4.8.4",
     "release-it": "*"
-  }
+  },
+  "tags": [
+    "streaming",
+    "functional-programming",
+    "fp-ts",
+    "generators"
+  ],
+  "keywords": [
+    "stream",
+    "streaming",
+    "functional-programming",
+    "fp-ts",
+    "generators"
+  ]
 }
