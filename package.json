@@ -5,52 +5,52 @@
   "exports": {
     ".": {
       "require": {
-        "default": "./dist/cjs/index.js",
-        "types": "./dist/cjs/index.d.ts"
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
       },
       "import": {
-        "default": "./dist/esm/index.js",
-        "types": "./dist/esm/index.d.ts"
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
       }
     },
     "./Stream": {
       "require": {
-        "default": "./dist/cjs/Stream/index.js",
-        "types": "./dist/cjs/Stream/index.d.ts"
+        "types": "./dist/cjs/Stream/index.d.ts",
+        "default": "./dist/cjs/Stream/index.js"
       },
       "import": {
-        "default": "./dist/esm/Stream/index.js",
-        "types": "./dist/esm/Stream/index.d.ts"
+        "types": "./dist/esm/Stream/index.d.ts",
+        "default": "./dist/esm/Stream/index.js"
       }
     },
     "./AsyncStream": {
       "require": {
-        "default": "./dist/cjs/AsyncStream/index.js",
-        "types": "./dist/cjs/AsyncStream/index.d.ts"
+        "types": "./dist/cjs/AsyncStream/index.d.ts",
+        "default": "./dist/cjs/AsyncStream/index.js"
       },
       "import": {
-        "default": "./dist/esm/AsyncStream/index.js",
-        "types": "./dist/esm/AsyncStream/index.d.ts"
+        "types": "./dist/esm/AsyncStream/index.d.ts",
+        "default": "./dist/esm/AsyncStream/index.js"
       }
     },
     "./Stream/*": {
       "require": {
-        "default": "./dist/cjs/Stream/*.js",
-        "types": "./dist/cjs/Stream/*.d.ts"
+        "types": "./dist/cjs/Stream/*.d.ts",
+        "default": "./dist/cjs/Stream/*.js"
       },
       "import": {
-        "default": "./dist/esm/Stream/*.js",
-        "types": "./dist/esm/Stream/*.d.ts"
+        "types": "./dist/esm/Stream/*.d.ts",
+        "default": "./dist/esm/Stream/*.js"
       }
     },
     "./AsyncStream/*": {
       "require": {
-        "default": "./dist/cjs/AsyncStream/*.js",
-        "types": "./dist/cjs/AsyncStream/*.d.ts"
+        "types": "./dist/cjs/AsyncStream/*.d.ts",
+        "default": "./dist/cjs/AsyncStream/*.js"
       },
       "import": {
-        "default": "./dist/esm/AsyncStream/*.js",
-        "types": "./dist/esm/AsyncStream/*.d.ts"
+        "types": "./dist/esm/AsyncStream/*.d.ts",
+        "default": "./dist/esm/AsyncStream/*.js"
       }
     }
   },
