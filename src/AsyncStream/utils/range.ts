@@ -16,6 +16,7 @@ import { AsyncStream } from '../uri'
  */
 export function range(start: number, end: number = Infinity): AsyncStream<number> {
   return async function* __range() {
-    while (start < end) yield start++
+    let from = start
+    while (from < end) yield from++
   }
 }
