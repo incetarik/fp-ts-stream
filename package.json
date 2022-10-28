@@ -34,6 +34,19 @@
       }
     }
   },
+  "typesVersions": {
+    "*": {
+      "index": [
+        "dist/cjs/index.d.ts"
+      ],
+      "Stream": [
+        "dist/cjs/Stream/index.d.ts"
+      ],
+      "AsyncStream": [
+        "dist/cjs/AsyncStream/index.d.ts"
+      ]
+    }
+  },
   "types": "dist/cjs/index.d.ts",
   "module": "dist/esm/index.js",
   "main": "dist/cjs/index.js",
