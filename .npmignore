@@ -5,3 +5,8 @@ release.sh
 .git
 .gitignore
 .vscode
+src
+*.js.map
+*.tar.gz
+*.zip
+tsconfig*.json
