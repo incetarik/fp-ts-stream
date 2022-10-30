@@ -1,8 +1,8 @@
-import { Predicate } from 'fp-ts/lib/Predicate'
 import { Refinement } from 'fp-ts/lib/Refinement'
 
 import { fromIterable, toArray } from '../conversions'
 import { AsyncStream } from '../uri'
+import { AsyncPredicate } from './async-predicate'
 
 /**
  * Creates a new {@link AsyncStream} which is a copy of the input dropping the
@@ -33,14 +33,14 @@ export function dropRightWhile<A, B extends A>(
  *
  * @export
  * @template A The value type.
- * @param {Predicate<A>} predicate The refinement/predicate function.
+ * @param {AsyncPredicate<A>} predicate The refinement/predicate function.
  * @return {<B extends A>(fa: AsyncStream<A>) => AsyncStream<B>} A function that
  * takes an async stream to drop its left while the condition holds.
  * 
  * @__PURE__
  */
 export function dropRightWhile<A>(
-  predicate: Predicate<A>
+  predicate: AsyncPredicate<A>
 ): <B extends A>(fb: AsyncStream<B>) => AsyncStream<B>
 
 /**
@@ -52,19 +52,19 @@ export function dropRightWhile<A>(
  *
  * @export
  * @template A The value type.
- * @param {Predicate<A>} predicate The refinement/predicate function.
+ * @param {AsyncPredicate<A>} predicate The refinement/predicate function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
  * async stream to drop its left while the condition holds.
  * 
  * @__PURE__
  */
-export function dropRightWhile<A>(predicate: Predicate<A>): (fa: AsyncStream<A>) => AsyncStream<A>
-export function dropRightWhile<A>(predicate: Predicate<A>): (fa: AsyncStream<A>) => AsyncStream<A> {
+export function dropRightWhile<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => AsyncStream<A>
+export function dropRightWhile<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) => AsyncStream<A> {
   return function _dropRightWhile(fa) {
     return async function* __dropRightWhile() {
       const array = await toArray(fa)
       for (let i = array.length - 1; i >= 0; --i) {
-        if (predicate(array[ i ])) {
+        if (await predicate(array[ i ])) {
           continue
         }
 

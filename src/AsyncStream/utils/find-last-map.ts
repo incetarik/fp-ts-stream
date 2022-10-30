@@ -5,6 +5,7 @@ import { map as mapTask, Task } from 'fp-ts/lib/Task'
 import { map } from '../functor'
 import { AsyncStream } from '../uri'
 import { findLast } from './find-last'
+import { MaybeAsync } from './maybe-async'
 
 /**
  * Given a selector function which takes an element and returns
@@ -14,12 +15,12 @@ import { findLast } from './find-last'
  * @export
  * @template A The value type.
  * @template B The mapped value type.
- * @param {(a: A) => Option<B>} f The mapping function.
+ * @param {(a: A) => Option<B> | Promise<Option<B>>} f The mapping function.
  * @return {(fa: AsyncStream<A>) => Task<Option<B>>} A function that takes a
  * stream and returns an option of `B`.
  * 
  * @__PURE__
  */
-export function findLastMap<A, B>(f: (a: A) => Option<B>): (fa: AsyncStream<A>) => Task<Option<B>> {
+export function findLastMap<A, B>(f: (a: A) => MaybeAsync<Option<B>>): (fa: AsyncStream<A>) => Task<Option<B>> {
   return flow(map(f), findLast(isSome), mapTask(flatten))
 }

@@ -2,6 +2,7 @@ import { constTrue } from 'fp-ts/lib/function'
 import { ReadonlyNonEmptyArray } from 'fp-ts/lib/ReadonlyNonEmptyArray'
 
 import { AsyncStream } from '../uri'
+import { MaybeAsync } from './maybe-async'
 
 type UnwrapOutputs<
   SA extends ReadonlyArray<AsyncStream<unknown>>,
@@ -14,7 +15,7 @@ type UnwrapOutputs<
 type OutputMapper<
   T extends ReadonlyArray<AsyncStream<unknown>>,
   R
-> = (...args: [ ...UnwrapOutputs<T> ]) => R
+> = (...args: [ ...UnwrapOutputs<T> ]) => MaybeAsync<R>
 
 type Condition<
   T extends ReadonlyArray<AsyncStream<unknown>>
@@ -55,8 +56,9 @@ export function comprehension<R, I extends ReadonlyNonEmptyArray<AsyncStream<unk
         const ma = mas[ 0 ]
         for await (const a of ma()) {
           collected[ depth ] = a
-          if (g!(...(collected as any))) {
-            yield f(...(collected as any))
+          const condition = await g!(...(collected as any))
+          if (condition) {
+            yield await f(...(collected as any))
           }
         }
       }

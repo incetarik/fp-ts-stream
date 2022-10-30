@@ -21,8 +21,6 @@ export function tail<A>(fa: AsyncStream<A>): Task<Option<AsyncStream<A>>> {
     const { done } = await gen.next()
 
     if (done) return none
-    return some(async function* _tail() {
-      yield* gen
-    })
+    return some(() => gen)
   }
 }

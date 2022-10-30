@@ -1,3 +1,5 @@
+import { MaybeAsync } from './maybe-async'
+
 /**
  * An interface that represents a function that returns a task of a boolean.
  *
@@ -6,7 +8,7 @@
  * @template A The value type.
  */
 export interface AsyncPredicate<A> {
-  (a: A): Promise<boolean> | boolean
+  (a: A): MaybeAsync<boolean>
 }
 
 /**
@@ -17,5 +19,5 @@ export interface AsyncPredicate<A> {
  * @template A The value type.
  */
 export interface AsyncPredicateWithIndex<I, A> {
-  (i: I, a: A): Promise<boolean> | boolean
+  (i: I, a: A): MaybeAsync<boolean>
 }

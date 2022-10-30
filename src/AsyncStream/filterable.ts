@@ -18,6 +18,7 @@ import {
   AsyncPredicate,
   AsyncPredicateWithIndex,
 } from './utils/async-predicate'
+import { MaybeAsync } from './utils/maybe-async'
 
 /**
  * Returns an {@link AsyncStream} that produces values that passes from the
@@ -100,14 +101,16 @@ export function filter<A>(predicate: AsyncPredicate<A>): (fa: AsyncStream<A>) =>
  * @export
  * @template A The value type.
  * @template B The mapped type.
- * @param {(i: number, a: A) => Option<B>} f The mapper function.
+ * @param {(i: number, a: A) => Option<B> | Promise<Option<B>>} f The mapper
+ * function.
+ * 
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
  * async stream of type `A` values and returns an async stream of type `B`
  * values.
  * 
  * @__PURE__
  */
-export function filterMapWithIndex<A, B>(f: (i: number, a: A) => Option<B>) {
+export function filterMapWithIndex<A, B>(f: (i: number, a: A) => MaybeAsync<Option<B>>) {
   /**
    * Takes an {@link AsyncStream} to filter map it with index.
    *
@@ -121,7 +124,7 @@ export function filterMapWithIndex<A, B>(f: (i: number, a: A) => Option<B>) {
     return async function* __filterMapWithIndex() {
       let i = 0
       for await (const a of fa()) {
-        const value = f(i++, a)
+        const value = await f(i++, a)
         if (isSome(value)) {
           yield value.value
         }
@@ -138,14 +141,14 @@ export function filterMapWithIndex<A, B>(f: (i: number, a: A) => Option<B>) {
  * @export
  * @template A The value type.
  * @template B The mapped type.
- * @param {(a: A) => Option<B>} f The mapper function.
+ * @param {(a: A) => Option<B> | Promise<Option<B>>} f The mapper function.
  * @return {(fa: AsyncStream<A>) => AsyncStream<B>} A function that takes an
  * async stream of type `A` values and returns an async stream of type `B`
  * values.
  * 
  * @__PURE__
  */
-export function filterMap<A, B>(f: (a: A) => Option<B>) {
+export function filterMap<A, B>(f: (a: A) => MaybeAsync<Option<B>>) {
   return /**#__PURE__*/ filterMapWithIndex<A, B>((_, a) => f(a))
 }
 
@@ -382,14 +385,16 @@ export function partitionWithIndex<A>(predicateWithIndex: AsyncPredicateWithInde
  * @template A The value type.
  * @template B The left type.
  * @template C The right type.
- * @param {(a: A) => Either<B, C>} f The iterating function.
+ * @param {(a: A) => Either<B, C> | Promise<Either<B, C>>} f The iterating
+ * function.
+ * 
  * @return {(fa: AsyncStream<A>) => Separated<AsyncStream<B>, AsyncStream<C>>} A
  * function that takes an async stream and returns a separate async streams.
  * 
  * @category filtering
  * @__PURE__
  */
-export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
+export function partitionMap<A, B, C>(f: (a: A) => MaybeAsync<Either<B, C>>) {
   return /**#__PURE__ */partitionMapWithIndex<A, B, C>((_, a) => f(a))
 }
 
@@ -401,14 +406,16 @@ export function partitionMap<A, B, C>(f: (a: A) => Either<B, C>) {
  * @template A The value type.
  * @template B The left type.
  * @template C The right type.
- * @param {(i: number, a: A) => Either<B, C>} f The iterating function.
+ * @param {(i: number, a: A) => Either<B, C> | Promise<Either<B, C>>} f The
+ * iterating function.
+ * 
  * @return {(fa: AsyncStream<A>) => Separated<AsyncStream<B>, AsyncStream<C>>} A
  * function that takes an async stream and returns a separate async streams.
  * 
  * @category filtering
  * @__PURE__
  */
-export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => Either<B, C>) {
+export function partitionMapWithIndex<A, B, C>(f: (i: number, a: A) => MaybeAsync<Either<B, C>>) {
   /**
    * Takes an {@link AsyncStream} to do partition based on the previously given
    * function.
