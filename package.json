@@ -1,6 +1,6 @@
 {
   "name": "fp-ts-stream",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A library providing async and sync streams for fp-ts.",
   "exports": {
     ".": {
