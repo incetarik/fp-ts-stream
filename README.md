@@ -6,8 +6,8 @@ to have _transducers_, that are executed as much as they are used. See the
 following example:
 
 ```ts
-import { range, filter, map, take } from 'fp-ts-stream/Stream'
-import { pipe } from 'fp-ts'
+import { range, filter, map, take, toArray } from 'fp-ts-stream/Stream'
+import { pipe } from 'fp-ts/lib/function'
 
 // The following will only run/execute the `range` iterator only 4 times.
 //
