@@ -3,6 +3,10 @@ This file contains the changes made to the package
 
 This sections are in descending order of the change date.
 
+## [0.1.10] - 2022-10-03
+### Changes
+Updated `README` file example.
+
 ## [0.1.9] - 2022-09-30
 ### Changes
 
@@ -36,5 +40,6 @@ Likewise the following instance implementations are updated:
 ## [0.1.0] - 2022-09-26
 Added initial commit
 
+[0.1.10]: https://github.com/incetarik/fp-ts-stream/compare/0.1.9...0.1.10
 [0.1.9]: https://github.com/incetarik/fp-ts-stream/compare/0.1.8...0.1.9
 [0.1.0]: https://github.com/incetarik/fp-ts-stream
