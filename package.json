@@ -68,9 +68,9 @@
     "url": "https://github.com/incetarik/fp-ts-stream/issues"
   },
   "homepage": "https://github.com/incetarik/fp-ts-stream#readme",
-  "dependencies": {
-    "fp-ts": "2.13.1",
-    "tslib": "2.4.0"
+  "peerDependencies": {
+    "fp-ts": ">= 2.12.0",
+    "tslib": ">= 2.4"
   },
   "devDependencies": {
     "typescript": "4.8.4",
