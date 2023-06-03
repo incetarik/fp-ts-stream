@@ -12,14 +12,14 @@ export interface AsyncStream<A> {
 
 /**
  * The type URI of the {@link AsyncStream} instances.
- * 
+ *
  * @category type lambdas
  */
-export const URI = 'AsyncStream'
+export const URI = 'fp-ts-stream/AsyncStream'
 
 /**
  * The type URI of the {@link AsyncStream} instances.
- * 
+ *
  * @category type lambdas
  */
 export type URI = typeof URI
