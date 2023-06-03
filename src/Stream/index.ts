@@ -20,6 +20,8 @@ export * from './uri'
 export * from './witherable'
 export * from './zero'
 
+export * from './utils/all-monad'
+export * from './utils/any-monad'
 export * from './utils/append-all'
 export * from './utils/append'
 export * from './utils/append'
